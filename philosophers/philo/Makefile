@@ -6,7 +6,7 @@
 #    By: wcorrea- <wcorrea-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/25 11:27:11 by wcorrea-          #+#    #+#              #
-#    Updated: 2023/05/25 19:53:42 by wcorrea-         ###   ########.fr        #
+#    Updated: 2023/05/26 11:36:43 by wcorrea-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ INCLUDE = -I include
 		${CC} ${CFLAGS} ${INCLUDE} -c $< -o ${<:.c=.o}
 
 $(NAME): ${OBJS}
-		${CC} ${CFLAGS} ${INCLUDE} ${OBJS} -o ${NAME}
+		${CC} ${CFLAGS} ${INCLUDE} ${OBJS} -o ${NAME} -pthread
 
 all:	${NAME}
 
