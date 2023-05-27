@@ -6,7 +6,7 @@
 /*   By: wcorrea- <wcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 19:46:42 by wcorrea-          #+#    #+#             */
-/*   Updated: 2023/05/25 19:47:45 by wcorrea-         ###   ########.fr       */
+/*   Updated: 2023/05/27 19:15:21 by wcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	destroy_padlocks(t_table *table)
 	pthread_mutex_destroy(&table->finish_padlock);
 }
 
-void	clean_threads(t_table *table)
+void	finish_dinner(t_table *table)
 {
 	int	i;
 
@@ -41,22 +41,22 @@ void	clean_threads(t_table *table)
 	destroy_padlocks(table);
 }
 
-void	clean_exit(t_table *table)
+void	start_dinner_monitor(t_table *table)
 {
 	int	i;
-	int	flag;
+	int	keep_dinner;
 
-	flag = 1;
-	while (flag)
+	keep_dinner = 1;
+	while (keep_dinner)
 	{
 		i = -1;
 		table->full_philos = 0;
 		while (++i < table->philosophers)
 		{
-			if (flag && is_dead_or_full(&table->philo[i]))
-				flag = 0;
+			if (keep_dinner && is_someone_dead_or_full(&table->philo[i]))
+				keep_dinner = 0;
 		}
 		usleep(10);
 	}
-	clean_threads(table);
+	finish_dinner(table);
 }

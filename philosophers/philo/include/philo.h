@@ -6,7 +6,7 @@
 /*   By: wcorrea- <wcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 11:27:22 by wcorrea-          #+#    #+#             */
-/*   Updated: 2023/05/25 20:08:26 by wcorrea-         ###   ########.fr       */
+/*   Updated: 2023/05/27 19:15:21 by wcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,18 @@ typedef struct s_table
 	pthread_mutex_t	finish_padlock;
 }					t_table;
 
-# define FORK "has taken a fork"
+# define TAKE "has taken a fork"
 # define EAT "is eating"
 # define SLEEP "is sleeping"
 # define THINK "is thinking"
 # define DIE "died"
-# define END "All philosophers ate enough!"
+# define FINISH "f"
+# define FINISH_MSG "All philosophers ate enough!"
+# define YES 1
+# define NO 0
 
-void		sleeping(t_philo *philo, long long ms);
-void		print_status(t_philo *philo, const char *status);
+void		advance_time(t_philo *philo, long long ms);
+void		print_action(t_philo *philo, const char *status);
 long long	get_time(void);
 void		exit_error(char *msg, t_table *table, int n);
 int			ft_atoi(const char *s);
@@ -65,15 +68,15 @@ void		start_padlocks(t_table *table);
 void		call_philosophers(t_table *table);
 void		set_table(t_table *table, int ac, char **av);
 
-int			is_finish(t_philo *philo, int order);
-int			is_dead_or_full(t_philo *philo);
-void		eating(t_philo *philo);
+int			is_time_to_finish(t_philo *philo, int order);
+int			is_someone_dead_or_full(t_philo *philo);
+void		time_to_eat(t_philo *philo);
 void		*start_dinner(void *arg);
-int			turn_philos_in_threads(t_table *table);
+int			turn_philosophers_in_threads(t_table *table);
 
 void		clean_table(t_table *table);
 void		destroy_padlocks(t_table *table);
-void		clean_threads(t_table *table);
-void		clean_exit(t_table *table);
+void		finish_dinner(t_table *table);
+void		start_dinner_monitor(t_table *table);
 
 #endif

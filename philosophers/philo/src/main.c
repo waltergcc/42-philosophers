@@ -6,18 +6,23 @@
 /*   By: wcorrea- <wcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 11:27:19 by wcorrea-          #+#    #+#             */
-/*   Updated: 2023/05/25 19:56:51 by wcorrea-         ###   ########.fr       */
+/*   Updated: 2023/05/27 21:37:35 by wcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	lone_philosopher(t_table *table)
+int	turn_philosophers_in_threads(t_table *table)
 {
-	print_status(&table->philo[0], FORK);
-	sleeping(&table->philo[0], table->time_to_die);
-	print_status(&table->philo[0], DIE);
-	is_finish(&table->philo[0], 1);
+	int	i;
+
+	i = -1;
+	while (++i < table->philosophers)
+	{
+		if (pthread_create(&table->philo[i].thread, NULL, \
+			start_dinner, &table->philo[i]))
+			exit_error("Couldn't create thread", table, 3);
+	}
 	return (0);
 }
 
@@ -86,9 +91,6 @@ int	main(int ac, char **av)
 	set_table(&table, ac, av);
 	call_philosophers(&table);
 	start_padlocks(&table);
-	if (table.philosophers == 1)
-		lone_philosopher(&table);
-	else
-		turn_philos_in_threads(&table);
-	clean_exit(&table);
+	turn_philosophers_in_threads(&table);
+	start_dinner_monitor(&table);
 }
