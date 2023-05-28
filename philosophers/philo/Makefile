@@ -6,7 +6,7 @@
 #    By: wcorrea- <wcorrea-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/25 11:27:11 by wcorrea-          #+#    #+#              #
-#    Updated: 2023/05/27 22:33:17 by wcorrea-         ###   ########.fr        #
+#    Updated: 2023/05/28 12:09:03 by wcorrea-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ OBJS = ${SRC:.c=.o}
 
 CC = cc
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g# -fsanitize=thread
 INCLUDE = -I include
 
 .c.o:

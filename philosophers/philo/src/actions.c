@@ -6,7 +6,7 @@
 /*   By: wcorrea- <wcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 19:51:37 by wcorrea-          #+#    #+#             */
-/*   Updated: 2023/05/27 21:57:40 by wcorrea-         ###   ########.fr       */
+/*   Updated: 2023/05/28 12:05:47 by wcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,16 @@ int	is_someone_dead_or_full(t_philo *philo)
 
 void	time_to_eat(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->table->fork_padlock[philo->l_fork]);
-	pthread_mutex_lock(&philo->table->fork_padlock[philo->r_fork]);
+	if (philo->id % 2 == 0)
+	{
+		pthread_mutex_lock(&philo->table->fork_padlock[philo->l_fork]);
+		pthread_mutex_lock(&philo->table->fork_padlock[philo->r_fork]);
+	}
+	else
+	{
+		pthread_mutex_lock(&philo->table->fork_padlock[philo->r_fork]);
+		pthread_mutex_lock(&philo->table->fork_padlock[philo->l_fork]);
+	}
 	print_action(philo, TAKE);
 	print_action(philo, TAKE);
 	print_action(philo, EAT);
