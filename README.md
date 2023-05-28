@@ -9,6 +9,6 @@ Ensure the code of philo complies with the following requirements and ask for ex
 - Check how the death of a philosopher is verified and if there is a mutex to prevent a philosopher from dying and starting eating at the same time.
 
 ## Used tests
-42-philosophers-tester: https://github.com/dantonik/42-philosophers-tester
-alientest_philosopher: https://github.com/lienardale/alientest_philosopher
-philosophers-visualizer: https://nafuka11.github.io/philosophers-visualizer
+- 42-philosophers-tester: https://github.com/dantonik/42-philosophers-tester
+- alientest_philosopher: https://github.com/lienardale/alientest_philosopher
+- philosophers-visualizer: https://nafuka11.github.io/philosophers-visualizer
