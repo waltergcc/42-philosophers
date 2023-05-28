@@ -6,7 +6,7 @@
 /*   By: wcorrea- <wcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 19:51:37 by wcorrea-          #+#    #+#             */
-/*   Updated: 2023/05/28 20:40:37 by wcorrea-         ###   ########.fr       */
+/*   Updated: 2023/05/29 00:31:47 by wcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	is_time_to_finish(t_philo *philo, int finish_order)
 int	is_someone_dead_or_full(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->table->eat_padlock);
-	if (get_time() - philo->last_eat >= philo->table->time_to_die)
+	if (now() - philo->last_eat >= philo->table->time_to_die)
 	{
 		print_action(philo, DIE);
 		is_time_to_finish(philo, YES);
@@ -70,7 +70,7 @@ void	time_to_eat(t_philo *philo)
 	advance_time(philo, philo->table->time_to_eat);
 	pthread_mutex_lock(&philo->table->eat_padlock);
 	philo->eat_count++;
-	philo->last_eat = get_time();
+	philo->last_eat = now();
 	pthread_mutex_unlock(&philo->table->eat_padlock);
 	pthread_mutex_unlock(&philo->table->fork_padlock[philo->r_fork]);
 	pthread_mutex_unlock(&philo->table->fork_padlock[philo->l_fork]);

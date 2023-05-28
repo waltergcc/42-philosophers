@@ -6,7 +6,7 @@
 /*   By: wcorrea- <wcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 11:27:22 by wcorrea-          #+#    #+#             */
-/*   Updated: 2023/05/28 20:40:37 by wcorrea-         ###   ########.fr       */
+/*   Updated: 2023/05/29 00:31:47 by wcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct s_table
 
 void		advance_time(t_philo *philo, long long ms);
 void		print_action(t_philo *philo, const char *status);
-long long	get_time(void);
+long long	now(void);
 void		exit_error(char *msg, t_table *table, int n);
 int			ft_atoi(const char *s);
 

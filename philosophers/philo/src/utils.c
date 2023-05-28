@@ -6,7 +6,7 @@
 /*   By: wcorrea- <wcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 12:44:04 by wcorrea-          #+#    #+#             */
-/*   Updated: 2023/05/28 20:33:00 by wcorrea-         ###   ########.fr       */
+/*   Updated: 2023/05/29 00:33:57 by wcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,29 @@
 
 void	advance_time(t_philo *philo, long long stop)
 {
-	long long	now;
+	long long	begin;
 
-	now = get_time();
-	while (!is_time_to_finish(philo, NO) && (get_time() - now) < stop)
+	begin = now();
+	while (!is_time_to_finish(philo, NO) && (now() - begin) < stop)
 		usleep(100);
 }
 
 void	print_action(t_philo *philo, const char *status)
 {
-	long long	now;
+	long long	time;
 
 	pthread_mutex_lock(&philo->table->print_padlock);
 	if (!is_time_to_finish(philo, NO))
 	{
-		now = get_time() - philo->table->start_time;
-		printf("%lld %d %s\n", now, philo->id, status);
+		time = now() - philo->table->start_time;
+		printf("%lld %d %s\n", time, philo->id, status);
 	}
 	pthread_mutex_unlock(&philo->table->print_padlock);
 	if (status[0] == 'f')
 		printf("%s\n", FINISH_MSG);
 }
 
-long long	get_time(void)
+long long	now(void)
 {
 	struct timeval	timeval;
 

@@ -6,7 +6,7 @@
 /*   By: wcorrea- <wcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 11:27:19 by wcorrea-          #+#    #+#             */
-/*   Updated: 2023/05/28 20:40:37 by wcorrea-         ###   ########.fr       */
+/*   Updated: 2023/05/29 00:31:47 by wcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	call_philosophers(t_table *table)
 	table->fork_padlock = malloc(sizeof(pthread_mutex_t) * table->philosophers);
 	if (!table->philo || !table->fork_padlock)
 		exit_error("Couldn't create the philosophers and forks", table, 1);
-	table->start_time = get_time();
+	table->start_time = now();
 	while (++i < table->philosophers)
 	{
 		table->philo[i].id = i + 1;
