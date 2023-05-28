@@ -6,7 +6,7 @@
 /*   By: wcorrea- <wcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 11:27:19 by wcorrea-          #+#    #+#             */
-/*   Updated: 2023/05/27 21:37:35 by wcorrea-         ###   ########.fr       */
+/*   Updated: 2023/05/28 20:40:37 by wcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,14 @@ void	call_philosophers(t_table *table)
 	table->fork_padlock = malloc(sizeof(pthread_mutex_t) * table->philosophers);
 	if (!table->philo || !table->fork_padlock)
 		exit_error("Couldn't create the philosophers and forks", table, 1);
-	table->start = get_time();
+	table->start_time = get_time();
 	while (++i < table->philosophers)
 	{
 		table->philo[i].id = i + 1;
 		table->philo[i].l_fork = i;
 		table->philo[i].r_fork = (i + 1) % table->philosophers;
 		table->philo[i].eat_count = 0;
-		table->philo[i].last_eat = table->start;
+		table->philo[i].last_eat = table->start_time;
 		table->philo[i].table = table;
 	}
 }
@@ -74,14 +74,14 @@ void	set_table(t_table *table, int ac, char **av)
 	table->time_to_eat = ft_atoi(av[3]);
 	table->time_to_sleep = ft_atoi(av[4]);
 	if (ac == 6)
-		table->must_eat = ft_atoi(av[5]);
+		table->must_eat_times = ft_atoi(av[5]);
 	else
-		table->must_eat = -1;
+		table->must_eat_times = -1;
 	if (table->philosophers < 1 || table->time_to_die < 1
 		|| table->time_to_eat < 1 || table->time_to_sleep < 1
-		|| (ac == 6 && table->must_eat < 1))
+		|| (ac == 6 && table->must_eat_times < 1))
 		exit_error("Invalid arguments", NULL, 0);
-	table->finish = 0;
+	table->finish_flag = 0;
 }
 
 int	main(int ac, char **av)

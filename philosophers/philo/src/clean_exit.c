@@ -6,7 +6,7 @@
 /*   By: wcorrea- <wcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 19:46:42 by wcorrea-          #+#    #+#             */
-/*   Updated: 2023/05/27 19:15:21 by wcorrea-         ###   ########.fr       */
+/*   Updated: 2023/05/28 20:45:42 by wcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,17 @@ void	finish_dinner(t_table *table)
 void	start_dinner_monitor(t_table *table)
 {
 	int	i;
-	int	keep_dinner;
+	int	continue_flag;
 
-	keep_dinner = 1;
-	while (keep_dinner)
+	continue_flag = 1;
+	while (continue_flag)
 	{
 		i = -1;
-		table->full_philos = 0;
+		table->ate_enough = 0;
 		while (++i < table->philosophers)
 		{
-			if (keep_dinner && is_someone_dead_or_full(&table->philo[i]))
-				keep_dinner = 0;
+			if (continue_flag && is_someone_dead_or_full(&table->philo[i]))
+				continue_flag = 0;
 		}
 		usleep(10);
 	}

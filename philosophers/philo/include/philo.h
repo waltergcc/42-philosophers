@@ -6,7 +6,7 @@
 /*   By: wcorrea- <wcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 11:27:22 by wcorrea-          #+#    #+#             */
-/*   Updated: 2023/05/27 19:15:21 by wcorrea-         ###   ########.fr       */
+/*   Updated: 2023/05/28 20:40:37 by wcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ typedef struct s_table
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
-	int				must_eat;
-	int				full_philos;
-	int				finish;
-	long long		start;
+	int				must_eat_times;
+	int				ate_enough;
+	int				finish_flag;
+	long long		start_time;
 	t_philo			*philo;
 	pthread_mutex_t	*fork_padlock;
 	pthread_mutex_t	print_padlock;

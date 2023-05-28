@@ -6,7 +6,7 @@
 /*   By: wcorrea- <wcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 19:51:37 by wcorrea-          #+#    #+#             */
-/*   Updated: 2023/05/28 12:05:47 by wcorrea-         ###   ########.fr       */
+/*   Updated: 2023/05/28 20:40:37 by wcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 int	is_time_to_finish(t_philo *philo, int finish_order)
 {
 	pthread_mutex_lock(&philo->table->finish_padlock);
-	if (finish_order || philo->table->finish)
+	if (finish_order || philo->table->finish_flag)
 	{
 		if (finish_order)
-			philo->table->finish = 1;
+			philo->table->finish_flag = 1;
 		pthread_mutex_unlock(&philo->table->finish_padlock);
 		return (1);
 	}
@@ -36,11 +36,11 @@ int	is_someone_dead_or_full(t_philo *philo)
 		pthread_mutex_unlock(&philo->table->eat_padlock);
 		return (1);
 	}
-	else if (philo->table->must_eat > 0
-		&& philo->eat_count >= philo->table->must_eat)
+	else if (philo->table->must_eat_times > 0
+		&& philo->eat_count >= philo->table->must_eat_times)
 	{
-		philo->table->full_philos++;
-		if (philo->table->full_philos >= philo->table->philosophers)
+		philo->table->ate_enough++;
+		if (philo->table->ate_enough >= philo->table->philosophers)
 		{
 			is_time_to_finish(philo, YES);
 			print_action(philo, FINISH);
@@ -105,6 +105,9 @@ void	*start_dinner(void *ptr)
 		print_action(philo, SLEEP);
 		advance_time(philo, philo->table->time_to_sleep);
 		print_action(philo, THINK);
+		if (philo->table->philosophers % 2 != 0
+			&& philo->table->philosophers <= 127)
+			advance_time(philo, philo->table->time_to_eat);
 	}	
 	return (0);
 }

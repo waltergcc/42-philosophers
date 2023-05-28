@@ -6,7 +6,7 @@
 /*   By: wcorrea- <wcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 12:44:04 by wcorrea-          #+#    #+#             */
-/*   Updated: 2023/05/27 18:58:12 by wcorrea-         ###   ########.fr       */
+/*   Updated: 2023/05/28 20:33:00 by wcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	print_action(t_philo *philo, const char *status)
 	pthread_mutex_lock(&philo->table->print_padlock);
 	if (!is_time_to_finish(philo, NO))
 	{
-		now = get_time() - philo->table->start;
+		now = get_time() - philo->table->start_time;
 		printf("%lld %d %s\n", now, philo->id, status);
 	}
 	pthread_mutex_unlock(&philo->table->print_padlock);
