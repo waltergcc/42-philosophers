@@ -1,6 +1,4 @@
-# philosophers
-
-# Project Name: philo
+# Philosophers
 
 This is a project called "philo" which simulates the dining philosophers problem using threads and mutexes. It is implemented in the C programming language.
 
@@ -8,7 +6,7 @@ The dining philosophers problem is a classic synchronization problem in computer
 
 The "philo" project provides a solution to this problem by creating a simulation of the dining philosophers scenario. It utilizes threads to represent each philosopher and mutexes to represent the chopsticks. The program ensures that the philosophers follow a set of rules to avoid deadlocks and provide fairness in resource allocation.
 
-## Building the Project
+## Compilation
 
 To build the project, follow these steps:
 
@@ -24,9 +22,9 @@ To build the project, follow these steps:
    make
    ```
 
-This will compile the source files and generate an executable named "philo".
+This will compile the source files and generate an executable named `philo`.
 
-## Usage
+## Run
 
 Once you have built the project, you can run it with the following command:
 
@@ -46,9 +44,21 @@ Example usage:
 ./philo 5 800 200 200
 ```
 
-This command will run the simulation with 5 philosophers, a time to die of 800 milliseconds, a time to eat of 200 milliseconds, and a time to sleep of 200 milliseconds. The simulation will continue until a philosopher dies or the program is manually terminated.
+This command will run the simulation with 5 philosophers, a time to die of 800 milliseconds, a time to eat of 200 milliseconds, and a time to sleep of 200 milliseconds. In this example, the simulation will continue indefinitely and any philosopher will die.
 
-## Grade: Not yet
+## Check Data Races
+The project cannot have `data races`, which means it cannot have access to a shared variable between threads without a synchronization mechanism. To check if the project has `data races` was used the compilation flag `-fsanitize=thread`. To compile the program with this flag, on the Makefile, remove the `#` of line 21 and save.
+```
+CFLAGS = -Wall -Wextra -Werror -fsanitize=thread
+```
+Then compile the project again.
+```bash
+make re
+``` 
+
+If the program has no data races, the program will run normally. Otherwise, the program will stop and show at the terminal where the error is.
+
+## Grade: 100/100
 
 ## Used tests
 - 42-philosophers-tester: https://github.com/dantonik/42-philosophers-tester
